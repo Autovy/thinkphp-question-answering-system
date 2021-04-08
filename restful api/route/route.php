@@ -18,6 +18,9 @@ Route::get('hello/:name', 'index/hello');
 // 注册资源路由，这是restful的基础
 // 相当于Route::resource('question','question/Question');
 // 注意路由要有一层相同，然后另一层不同，否则路由会混乱
+
+// 题目管理路由
+// ---------------------------------------------------------
 Route::get('question/get', 'question/Question/index');
 Route::get('question/read/:id', 'question/Question/read');
 Route::post('question/insert', 'question/Question/save');
