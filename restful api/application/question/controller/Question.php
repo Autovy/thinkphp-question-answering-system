@@ -3,12 +3,9 @@
 namespace app\question\controller;
 
 use app\question\model\Options;
-use mysql_xdevapi\Exception;
+use think\exception\ThrowableError;
 use think\Controller;
 use think\exception\ErrorException;
-use think\exception\HttpResponseException;
-use think\exception\ThrowableError;
-use think\exception\ValidateException;
 use think\Request;
 // 为了方便辨认，将question模型命名为QuestionModel
 use app\question\model\Question as QuestionModel;
@@ -50,21 +47,25 @@ class Question extends Controller
      */
     public function read($id)
     {
-        // 使用预加载查询方法，with调用主模型的op方法关联附表
-        // 返回后可以通过关联输出方法处理关联属性（隐藏追加显示等）
-        $list = QuestionModel::with('op')->select();
-        $list = $list->hidden(['op.question_id']);
 
         // 异常处理
         // 设置验证器
         $validate = new \app\question\validate\Question;
-        try{
 
-            // 验证器只能验证关联数组形式
+
+        // 验证器只能验证关联数组形式
             if($validate->check($data=['id'=>$id])){
 
-                return json(['code'=> 200,'data'=>$list[$id-1]]);
-
+                // 使用预加载查询方法，with调用主模型的op方法关联附表
+                // 返回后可以通过关联输出方法处理关联属性（隐藏追加显示等）
+                $list = QuestionModel::with('op')->get($id);
+                if(!is_null($list)) {
+                    $list = $list->hidden(['op.question_id']);
+                    return json(['code' => 200, 'data' => $list]);
+                }
+                else{
+                    return json(['code'=>400,'msg'=>'查无此条目']);
+                }
             }
 
             else{
@@ -72,11 +73,6 @@ class Question extends Controller
                 return json(['code'=> 400,'msg'=>$validate->getError()]);
 
             }
-
-        }
-        catch (ErrorException $error){
-            return json(['code'=> 404,'msg'=>'超过请求范围']);
-        }
 
 
     }
@@ -139,7 +135,7 @@ class Question extends Controller
         $question = QuestionModel::get($id);
 
         // 异常捕捉
-        try{
+        if(!is_null($question)){
 
             // 删除主表数据
             if($question->delete()){
@@ -151,7 +147,8 @@ class Question extends Controller
             }
 
             }
-        catch (ThrowableError $error){
+
+        else{
             return json(['code'=> 400, 'msg'=>'未找到删除对象']);
         }
 
