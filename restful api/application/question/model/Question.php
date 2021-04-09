@@ -13,7 +13,7 @@ class Question extends Model
     protected $field = [
 
         'id' => 'int',
-        'question' , 'score','opa','opb','opc','opc'
+        'question' , 'score','opa','opb','opc','opc',
 
     ];
 

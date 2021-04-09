@@ -1,2 +1,9 @@
-INSERT INTO `tp_question`(`id`, `question`, `score`) VALUES (1, 'testdata', 5);
-INSERT INTO `tp_question`(`id`, `question`, `score`) VALUES (2, 'test2', 10);
+INSERT INTO `tp_question`(`id`, `question`, `score`) VALUES (13, 'test2', '4');
+INSERT INTO `tp_question`(`id`, `question`, `score`) VALUES (16, 'testdata', '20');
+INSERT INTO `tp_question`(`id`, `question`, `score`) VALUES (5, '1111aagffff', '5aggg');
+INSERT INTO `tp_question`(`id`, `question`, `score`) VALUES (14, 'test2', '5');
+INSERT INTO `tp_question`(`id`, `question`, `score`) VALUES (17, 'testdata', '20');
+INSERT INTO `tp_question`(`id`, `question`, `score`) VALUES (18, 'testdata', '20');
+INSERT INTO `tp_question`(`id`, `question`, `score`) VALUES (19, 'testdata', '20');
+INSERT INTO `tp_question`(`id`, `question`, `score`) VALUES (20, 'testdata', '20');
+INSERT INTO `tp_question`(`id`, `question`, `score`) VALUES (21, 'testdata', '20');

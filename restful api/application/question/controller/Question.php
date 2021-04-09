@@ -8,6 +8,7 @@ use think\exception\ErrorException;
 use think\Request;
 // 为了方便辨认，将question模型命名为QuestionModel
 use app\question\model\Question as QuestionModel;
+use app\question\model\Options as QptionsModel;
 
 class Question extends Controller
 {
@@ -23,7 +24,7 @@ class Question extends Controller
         // 使用预加载查询方法，with调用主模型的op方法关联附表
         // 返回后可以通过关联输出方法处理关联属性（隐藏追加显示等）
         $list = QuestionModel::with('op')->select();
-        $list = $list->hidden(['op.question_id']);
+        $list = $list->hidden(['op.question_id','op.answer']);
 
         // 异常处理
         if(is_null($list)){
@@ -59,7 +60,7 @@ class Question extends Controller
                 // 返回后可以通过关联输出方法处理关联属性（隐藏追加显示等）
                 $list = QuestionModel::with('op')->get($id);
                 if(!is_null($list)) {
-                    $list = $list->hidden(['op.question_id']);
+                    $list = $list->hidden(['op.question_id','op.answer']);
                     return json(['code' => 200, 'data' => $list]);
                 }
                 else{
@@ -88,11 +89,11 @@ class Question extends Controller
      */
     public function save(Request $request)
     {
+
         // 调用requset的param方法得到post过来的数据
         $data = $request->param();
 
         // 把post请求的数据插入数据库中（注意数据库的设置）
-
         // 异常捕捉
         try{
             // 主表插入
@@ -107,6 +108,7 @@ class Question extends Controller
             $option->opb = $data['opb'];
             $option->opc = $data['opc'];
             $option->opd = $data['opd'];
+            $option->answer = $data['answer'];
             $question->save();
             $question->op()->save($option);
             return json(['code'=> 201,'msg'=>'创建成功']);
@@ -114,7 +116,6 @@ class Question extends Controller
         catch (ErrorException $error){
             return json(['code'=> 400,'msg'=> $error->getMessage()]);
         }
-
 
 
 
@@ -152,4 +153,58 @@ class Question extends Controller
         }
 
     }
+
+    /**
+     * 答案验证接口
+     * 插入数据（post）：http://127.0.0.1:8000/question/verify/
+     *
+     * @param  \think\Request  $request
+     * @return \think\Response
+     */
+    public function verify(Request $request)
+    {
+        // 获得用户答卷
+        $num = 0;
+        $scoreall = 0;
+        $data = $request->param();
+
+
+        // 验证答案（post的字段为题目q+id的格式发送请求）
+        foreach ($data as $key=>$datum){
+
+
+            $obj = QuestionModel::field('id,score')->select();
+            $id = str_replace('q','',$key);
+
+            // 查找答案，异常处理不存在的题目
+            try {
+                $answer = $this->answer($id);
+            }
+            catch (ErrorException $error){
+                return json(['code'=> 400, 'msg'=>'题目不存在']);
+            }
+
+            // 答案正确时
+            if($datum==$answer){
+                $scoreall += $obj[$num]['score'];
+            }
+            $num++;
+
+        }
+
+        return json(['code'=> 200, 'score'=>$scoreall ,'msg'=>'分数验证成功']);
+
+
+
+
+    }
+
+    // 私有方法，供上面verify方法调用
+    private function answer($id){
+        // 获得题目答案，和分数
+        $answer = QuestionModel::get($id)->op->answer;
+        return $answer;
+    }
+
+
 }

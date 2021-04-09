@@ -1,2 +1,9 @@
-INSERT INTO `tp_options`(`question_id`, `opa`, `opb`, `opc`, `opd`) VALUES (1, 'A选项', 'B选项', 'C选项', 'D选项');
-INSERT INTO `tp_options`(`question_id`, `opa`, `opb`, `opc`, `opd`) VALUES (2, 'A选项', 'B选项', 'C选项', 'D选项');
+INSERT INTO `tp_options`(`question_id`, `opa`, `opb`, `opc`, `opd`, `answer`) VALUES (13, '1', '2', '3', '4', 'A');
+INSERT INTO `tp_options`(`question_id`, `opa`, `opb`, `opc`, `opd`, `answer`) VALUES (16, '1', '2', '3', '5', 'B');
+INSERT INTO `tp_options`(`question_id`, `opa`, `opb`, `opc`, `opd`, `answer`) VALUES (5, '1', '2', '3', '4', 'A');
+INSERT INTO `tp_options`(`question_id`, `opa`, `opb`, `opc`, `opd`, `answer`) VALUES (14, '1', '2', '3', '4', 'C');
+INSERT INTO `tp_options`(`question_id`, `opa`, `opb`, `opc`, `opd`, `answer`) VALUES (17, '1', '2', '3', '5', 'D');
+INSERT INTO `tp_options`(`question_id`, `opa`, `opb`, `opc`, `opd`, `answer`) VALUES (18, '1', '2', '3', '5', 'A');
+INSERT INTO `tp_options`(`question_id`, `opa`, `opb`, `opc`, `opd`, `answer`) VALUES (19, '1', '2', '3', '5', 'B');
+INSERT INTO `tp_options`(`question_id`, `opa`, `opb`, `opc`, `opd`, `answer`) VALUES (20, '1', '2', '3', '5', 'B');
+INSERT INTO `tp_options`(`question_id`, `opa`, `opb`, `opc`, `opd`, `answer`) VALUES (21, '1', '2', '3', '5', 'D');

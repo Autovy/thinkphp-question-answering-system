@@ -26,12 +26,17 @@ Route::get('question/read/:id', 'question/Question/read');
 Route::post('question/insert', 'question/Question/save');
 Route::delete('question/delete/:id', 'question/Question/delete');
 
+// 答案验证路由
+// ----------------------------------------------------
+Route::post('question/verify', 'question/Question/verify');
+
 
 //用户管理路由
 // --------------------------------------------------------
 Route::get('user/get', 'user/User/index');
 Route::get('user/read/:id', 'user/User/read');
 Route::post('user/insert', 'user/User/save');
+Route::put('user/update/:id', 'user/User/update');
 Route::delete('user/delete/:id', 'user/User/delete');
 
 

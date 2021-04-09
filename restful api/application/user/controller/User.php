@@ -99,4 +99,37 @@ class User extends Controller
             return json(['code'=> 400, 'msg'=> '找不到删除对象']);
         }
     }
+
+    /**
+     *
+     *  更新用户分数:http://127.0.0.1:8000/user/update/$id
+     *
+     * @param  \think\Request  $request
+     * @param int $id
+     * @return \think\Response
+     */
+     public function update(Request $request,$id){
+         // 获得分数
+         $score = $request->param('score');
+         // 获得对象数据
+         $user = UserModel::get($id);
+         if($user==NULL||$score==NULL){
+             return json(['code'=> 400, 'msg'=> '找不到对应数据']);
+         }
+
+         else{
+             $user->score = $score;
+
+             if($user->save()){
+                 return json(['code'=> 200, 'msg'=> '更新分数成功']);
+             }
+             else{
+                 return json(['code'=> 400, 'msg'=> '更新分数失败']);
+             }
+         }
+
+     }
+
+
+
 }

@@ -11,11 +11,11 @@ class Question extends Validate
     protected $rule = [
 
         'id'=>'require|integer',
+
     ];
 
     protected $message  =   [
-
         'id.require'=>'缺乏必要id',
-        'id.integer'=>'请求格式错误'
+        'id.integer'=>'请求格式错误',
     ];
 }
