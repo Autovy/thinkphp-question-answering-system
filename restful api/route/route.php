@@ -27,6 +27,15 @@ Route::post('question/insert', 'question/Question/save');
 Route::delete('question/delete/:id', 'question/Question/delete');
 
 
+//用户管理路由
+// --------------------------------------------------------
+Route::get('user/get', 'user/User/index');
+Route::get('user/read/:id', 'user/User/read');
+Route::post('user/insert', 'user/User/save');
+Route::delete('user/delete/:id', 'user/User/delete');
+
+
+
 
 
 return [

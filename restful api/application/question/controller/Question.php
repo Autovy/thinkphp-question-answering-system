@@ -3,7 +3,6 @@
 namespace app\question\controller;
 
 use app\question\model\Options;
-use think\exception\ThrowableError;
 use think\Controller;
 use think\exception\ErrorException;
 use think\Request;
@@ -14,7 +13,7 @@ class Question extends Controller
 {
 
     /**
-     * 构造方法依赖注入
+     *
      * 查看所有题目接口(get)：http://127.0.0.1:8000/question/get/
      *
      * @return \think\Response
@@ -39,7 +38,7 @@ class Question extends Controller
 
 
     /**
-     * 构造方法依赖注入
+     *
      * 查看指定题目接口(get) :http://127.0.0.1:8000/question/read/$id/
      *
      * @param  int  $id
@@ -81,7 +80,7 @@ class Question extends Controller
 
 
     /**
-     * 构造方法依赖注入
+     * 操作方法依赖注入
      * 插入数据（post）：http://127.0.0.1:8000/question/insert/
      *
      * @param  \think\Request  $request
@@ -124,7 +123,7 @@ class Question extends Controller
 
 
     /**
-     * 构造方法依赖注入
+     *
      * 删除指定资源(delete):http://127.0.0.1:8000/question/delete/$id
      *
      * @param  int  $id
