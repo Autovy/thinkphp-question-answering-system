@@ -28,7 +28,7 @@ Route::delete('question/delete/:id', 'question/Question/delete');
 
 // 答案验证路由
 // ----------------------------------------------------
-Route::post('question/verify', 'question/Question/verify');
+Route::post('question/verify', 'question/Question/verify')->allowCrossDomain();
 
 
 //用户管理路由
@@ -39,6 +39,9 @@ Route::post('user/insert', 'user/User/save');
 Route::put('user/update/:id', 'user/User/update');
 Route::delete('user/delete/:id', 'user/User/delete');
 
+// 文件管理路由
+Route::get('file/get','file/File/get');
+Route::post('file/upload','file/File/upload');
 
 
 
